@@ -1,10 +1,26 @@
 package br.devbellini.view.usuario;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class CadastroCliente {
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
+public class CadastroCliente extends JDialog{
+    private JTextField campoEmpresa;
+    private JTextField campoCNPJ;
+    private JTextField campoResponsavel;
+    private JTextField campoTelefone;
+    private JPanel cadastroCliente;
+
+    public CadastroCliente(JFrame parent) {
+        super(parent);
+        setTitle("CadastroCliente");
+        setContentPane(cadastroCliente);
+        setMinimumSize(new Dimension(600,600));
+        setModal(true);
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setVisible(true);
+    }
+    public static void main(String[] args) {
+        CadastroCliente cadastroCliente = new CadastroCliente(null);
+    }
 }
