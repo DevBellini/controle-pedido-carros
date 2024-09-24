@@ -1,4 +1,4 @@
-package br.devbellini.view.usuario;
+package br.devbellini.view;
 
 import javax.swing.*;
 import java.awt.*;

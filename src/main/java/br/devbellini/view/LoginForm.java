@@ -1,4 +1,4 @@
-package br.devbellini.view.usuario;
+package br.devbellini.view;
 
 import br.devbellini.application.interfaces.IUsuarioService;
 import br.devbellini.application.service.UsuarioService;
