@@ -10,7 +10,7 @@ public class ConnectionFactory {
 
     private static final String PASSWORD = "";
 
-    private static  final String DATABASE_URL = "jdbc:mysql://localhost:3306/Teste1";
+    private static  final String DATABASE_URL = "jdbc:mysql://localhost:3306/ManengerDB";
 
     public static Connection createConncetionToMySQL(){
         try {
