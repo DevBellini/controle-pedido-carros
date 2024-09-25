@@ -19,6 +19,7 @@ public class LoginForm extends JDialog{
     private JLabel senha;
     private JLabel usuario;
     private JPanel loginPanel;
+    private JButton registrarButton;
 
 
     public LoginForm(JFrame parent) {

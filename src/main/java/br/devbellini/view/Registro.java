@@ -11,6 +11,8 @@ public class Registro extends JDialog {
     private JTextField campoTelefone;
     private JTextField campoLoginConfirma;
     private JPanel registroPanel;
+    private JButton registrarButton;
+    private JButton cancelarButton;
 
     public Registro(JFrame parent) {
         super(parent);
