@@ -8,6 +8,7 @@ public class CadastroPedido extends JDialog{
     private JTextField campoCliente;
     private JTable table1;
     private JPanel cadastroPedido;
+    private JButton salvarButton;
 
     public CadastroPedido(JFrame parent) {
         super(parent);

@@ -9,6 +9,7 @@ public class CadastroCliente extends JDialog{
     private JTextField campoResponsavel;
     private JTextField campoTelefone;
     private JPanel cadastroCliente;
+    private JButton salvarButton;
 
     public CadastroCliente(JFrame parent) {
         super(parent);
