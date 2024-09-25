@@ -6,6 +6,7 @@ public enum ErrorCodes {
     PEDIDO_JA_CADASTRADO("Pedido ja cadastrado."),
     PEDIDO_NÃO_CADASTRADO("Pedido não cadastrado"),
     CLIENTE_JA_CADASTRADO("Cliente ja cadastrado."),
+    CLIENTE_NÃO_CADASTRADO("Cliente não cadastrado"),
     USUARIO_NAO_CADASTRADO("Usuário não cadastrado");
 
     private final String message;
