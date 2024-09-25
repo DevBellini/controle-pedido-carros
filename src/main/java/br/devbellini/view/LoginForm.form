@@ -11,7 +11,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <grid id="cac2e" binding="JPanel" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="cac2e" binding="JPanel" layout-manager="GridLayoutManager" row-count="4" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="10" left="10" bottom="10" right="10"/>
         <constraints>
           <grid row="0" column="0" row-span="7" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false"/>
@@ -37,15 +37,6 @@
             <properties>
               <font name="Segoe Print" size="22" style="1"/>
               <text value="Tela de Login"/>
-            </properties>
-          </component>
-          <component id="a675f" class="javax.swing.JButton" binding="registrarButton" default-binding="true">
-            <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <font name="Segoe Print" size="22" style="1"/>
-              <text value="Registrar"/>
             </properties>
           </component>
           <vspacer id="24410">
@@ -108,22 +99,22 @@
           <font name="Segoe Print" size="18" style="1"/>
         </properties>
       </component>
-      <component id="3e84" class="javax.swing.JButton" binding="btnCancelar">
+      <component id="3e84" class="javax.swing.JButton" binding="btnRegistrar">
         <constraints>
           <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Segoe Print" size="18" style="1"/>
-          <text value="Cancelar"/>
+          <text value="Registrar"/>
         </properties>
       </component>
-      <component id="942a3" class="javax.swing.JButton" binding="btnOK">
+      <component id="942a3" class="javax.swing.JButton" binding="btnEntrar">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Segoe Print" size="18" style="1"/>
-          <text value="OK"/>
+          <text value="Entrar"/>
         </properties>
       </component>
     </children>
