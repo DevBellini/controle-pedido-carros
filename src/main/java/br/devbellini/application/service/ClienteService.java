@@ -13,25 +13,24 @@ import java.util.Optional;
 @AllArgsConstructor
 public class ClienteService implements IClienteService {
 
-
     private final IClienteRepository _clienteRepository;
 
     @Override
-    public void salvar(String cnpj) {
-        Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cnpj);
+    public void salvar(Cliente cliente) { // Alterado para aceitar um objeto Cliente
+        Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cliente.getCnpj());
         if (clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_JA_CADASTRADO, "Cliente já cadastrado");
         }
-        _clienteRepository.salvar(cnpj);
+        _clienteRepository.salvar(cliente); // Passa o objeto Cliente
     }
 
     @Override
-    public void atualizarCliente(String cnpj) {
-        Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cnpj);
+    public void atualizarCliente(Cliente cliente) { // Alterado para aceitar um objeto Cliente
+        Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cliente.getCnpj());
         if (!clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado");
         }
-        _clienteRepository.atualizarCliente(cnpj);
+        _clienteRepository.atualizarCliente(cliente); // Passa o objeto Cliente
     }
 
     @Override
@@ -54,8 +53,6 @@ public class ClienteService implements IClienteService {
         if (!clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado");
         }
-        return Optional.of(clienteOptional).get();
+        return clienteOptional; // Retorna diretamente o Optional
     }
-
 }
-
