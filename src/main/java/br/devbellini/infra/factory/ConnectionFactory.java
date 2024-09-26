@@ -6,36 +6,43 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
+    // Nome de usuário do MySQL
     private static final String USERNAME = "root";
 
+    // Senha do MySQL
     private static final String PASSWORD = "";
 
-    private static  final String DATABASE_URL = "jdbc:mysql://localhost:3306/ManengerDB";
+    // URL de conexão com o banco de dados MySQL
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/ManengerDB";
 
-    public static Connection createConncetionToMySQL(){
+    // Método para criar a conexão com o MySQL
+    public static Connection createConnectionToMySQL() {
         try {
+            // Carrega o driver do MySQL
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Driver do MySQL não encontrado", e);
         }
 
         Connection connection = null;
         try {
+            // Tenta estabelecer uma conexão com o banco de dados
             connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erro ao conectar ao MySQL", e);
         }
         return connection;
     }
 
+    // Método principal para testar a conexão
     public static void main(String[] args) {
-        Connection con = createConncetionToMySQL();
-        if(con != null){
-            System.out.println("Conexão pega com sucesso");
+        Connection con = createConnectionToMySQL();
+        if (con != null) {
+            System.out.println("Conexão estabelecida com sucesso");
             try {
                 con.close();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Erro ao fechar a conexão", e);
             }
         }
     }

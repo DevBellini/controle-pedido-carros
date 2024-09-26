@@ -18,20 +18,26 @@ public class UsuarioService implements IUsuarioService {
 
     @Override
     public void registerUser(Usuario usuario) {
+        // Busca o usuário pelo nome de usuário (login)
         Usuario validarUsuario = _usuarioRepository.buscarPorUsuario(usuario.getUsuario());
 
-        if (validarUsuario.getUsuario() != null) {
+        // Verifica se o usuário já existe no banco de dados
+        if (validarUsuario != null && validarUsuario.getUsuario() != null) {
             throw new ExceptionResponse(ErrorCodes.USUARIO_JA_CADASTRADO, "Usuário já existe.");
         }
 
+        // Criptografa a senha do novo usuário
         String senha = usuario.getSenha();
         BasicPasswordEncryptor basicPasswordEncryptor = new BasicPasswordEncryptor();
         String senhaCriptografada = basicPasswordEncryptor.encryptPassword(senha);
 
+        // Define a senha criptografada no objeto usuário
         usuario.setSenha(senhaCriptografada);
-        _usuarioRepository.save(usuario);
 
+        // Salva o novo usuário no banco de dados
+        _usuarioRepository.save(usuario);
     }
+
 
     @Override
     public Login login(Login login) {
