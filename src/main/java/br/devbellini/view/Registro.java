@@ -89,8 +89,7 @@ public class Registro extends JDialog {
         }
         JOptionPane.showMessageDialog(this, "Registro feito com sucesso");
         dispose();
-//        LoginForm loginForm = new LoginForm(null);
-
+//
     }
 
 

@@ -16,21 +16,21 @@ public class ClienteService implements IClienteService {
     private final IClienteRepository _clienteRepository;
 
     @Override
-    public void salvar(Cliente cliente) { // Alterado para aceitar um objeto Cliente
+    public void salvar(Cliente cliente) {
         Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cliente.getCnpj());
         if (clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_JA_CADASTRADO, "Cliente já cadastrado");
         }
-        _clienteRepository.salvar(cliente); // Passa o objeto Cliente
+        _clienteRepository.salvar(cliente);
     }
 
     @Override
-    public void atualizarCliente(Cliente cliente) { // Alterado para aceitar um objeto Cliente
+    public void atualizarCliente(Cliente cliente) {
         Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cliente.getCnpj());
         if (!clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado");
         }
-        _clienteRepository.atualizarCliente(cliente); // Passa o objeto Cliente
+        _clienteRepository.atualizarCliente(cliente);
     }
 
     @Override
@@ -53,6 +53,6 @@ public class ClienteService implements IClienteService {
         if (!clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado");
         }
-        return clienteOptional; // Retorna diretamente o Optional
+        return clienteOptional;
     }
 }

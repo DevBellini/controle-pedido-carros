@@ -61,13 +61,11 @@ public class ClienteCadastro extends JDialog {
 
         try {
             _clienteService.salvar(clienteCadastrar);
+            JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso");
+            dispose(); // Fecha a janela após salvar com sucesso
         } catch (ExceptionResponse e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
-            return;
         }
-
-        JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso");
-        dispose();
     }
 
     // Para testar a classe
