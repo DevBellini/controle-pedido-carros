@@ -83,7 +83,7 @@ public class LoginForm extends JDialog {
         // ShowtimeForm showtimeForm = new ShowtimeForm(null); // Caso queira chamar outra tela após login
     }
 
-    public static void main(String[] args) {
-        LoginForm loginForm = new LoginForm(null);
-    }
+//    public static void main(String[] args) {
+//        LoginForm loginForm = new LoginForm(null);
+//    }
 }

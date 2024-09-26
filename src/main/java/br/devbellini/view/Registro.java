@@ -33,7 +33,6 @@ public class Registro extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setVisible(true);
 
         registrarButton.addActionListener(new ActionListener() {
             @Override
@@ -76,9 +75,12 @@ public class Registro extends JDialog {
         }
         Usuario usuarioRegistrar = new Usuario();
         usuarioRegistrar.setNome(nome);
-        usuarioRegistrar.setEmail(email);        usuarioRegistrar.setUsuario(usuario);
+        usuarioRegistrar.setEmail(email);
+        usuarioRegistrar.setUsuario(usuario);
         usuarioRegistrar.setSenha(senha);
         usuarioRegistrar.setTelefone(telefone);
+
+
         try {
             _usuarioService.registerUser(usuarioRegistrar);
         } catch (ExceptionResponse e) {
@@ -87,12 +89,12 @@ public class Registro extends JDialog {
         }
         JOptionPane.showMessageDialog(this, "Registro feito com sucesso");
         dispose();
-        LoginForm loginForm = new LoginForm(null);
+//        LoginForm loginForm = new LoginForm(null);
 
     }
 
 
-    public static void main(String[] args) {
-        Registro registro = new Registro(null);
-    }
+//    public static void main(String[] args) {
+//        Registro registro = new Registro(null);
+//    }
 }
