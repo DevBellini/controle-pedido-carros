@@ -55,7 +55,7 @@ public class ClienteCadastroRepository implements IClienteRepository {
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
-            throw new ExceptionResponse(ErrorCodes.ERRO_AO_ATUALIZAR_CLIENTE, "Erro ao atualizar cliente.");
+            throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado.");
         }
     }
 
@@ -80,7 +80,7 @@ public class ClienteCadastroRepository implements IClienteRepository {
     @Override
     public List<Cliente> buscarTodosClientes() {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM cliente";  // Verifique se a tabela 'cliente' existe no banco e contém registros
         try (Connection connectionMySQL = ConnectionFactory.createConnectionToMySQL();
              PreparedStatement preparedStatement = connectionMySQL.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -95,19 +95,18 @@ public class ClienteCadastroRepository implements IClienteRepository {
                 clientes.add(cliente);
             }
         } catch (Exception e) {
-            throw new ExceptionResponse(ErrorCodes.ERRO_AO_BUSCAR_CLIENTES, "Erro ao buscar todos os clientes.");
+            throw new ExceptionResponse(ErrorCodes.ERRO_AO_BUSCAR_CLIENTES, "Erro ao buscar cliente: " + e.getMessage());
         }
         return clientes;
     }
-
     @Override
     public Optional<Cliente> buscarPorCnpj(String cnpj) {
-        String sql = "SELECT * FROM cliente WHERE cnpj = ?";
+        String sql = "SELECT * FROM cliente WHERE TRIM(cnpj) = ?";
         Cliente clienteResult = null;
         try (Connection connectionMySQL = ConnectionFactory.createConnectionToMySQL();
              PreparedStatement preparedStatement = connectionMySQL.prepareStatement(sql)) {
 
-            preparedStatement.setString(1, cnpj);
+            preparedStatement.setString(1, cnpj.trim()); // Removendo espaços em branco antes e depois
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     clienteResult = new Cliente();

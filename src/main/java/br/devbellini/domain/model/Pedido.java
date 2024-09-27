@@ -1,16 +1,16 @@
 package br.devbellini.domain.model;
 
-import lombok.*;
+import lombok.Data;
 
 @Data
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Pedido {
 
     private Integer id_pedido;
     private int numeroPedido;
     private String cliente;
+
+    public Pedido(int numeroPedido) {
+        this.numeroPedido = numeroPedido;
+    }
 
 }

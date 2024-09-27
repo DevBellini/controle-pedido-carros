@@ -18,10 +18,12 @@ public class ClienteService implements IClienteService {
     @Override
     public void salvar(Cliente cliente) {
         Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cliente.getCnpj());
+
         if (clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_JA_CADASTRADO, "Cliente já cadastrado");
+        } else {
+            _clienteRepository.salvar(cliente);
         }
-        _clienteRepository.salvar(cliente);
     }
 
     @Override

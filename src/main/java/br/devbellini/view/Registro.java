@@ -49,7 +49,6 @@ public class Registro extends JDialog {
         setVisible(true);
 
 
-
     }
 
     private void RegistrarUsuario() {
@@ -89,11 +88,7 @@ public class Registro extends JDialog {
         }
         JOptionPane.showMessageDialog(this, "Registro feito com sucesso");
         dispose();
-//
+
     }
 
-
-//    public static void main(String[] args) {
-//        Registro registro = new Registro(null);
-//    }
 }

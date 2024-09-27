@@ -1,59 +1,54 @@
 package br.devbellini.application.service;
 
-import br.devbellini.application.interfaces.IPedidoService;
 import br.devbellini.domain.enums.ErrorCodes;
 import br.devbellini.domain.interfaces.IPedidoRepository;
 import br.devbellini.domain.model.Pedido;
 import br.devbellini.infra.exception.ExceptionResponse;
-import lombok.AllArgsConstructor;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-@AllArgsConstructor
-public class PedidoService implements IPedidoService {
-
-    private final IPedidoRepository _pedidoRepository;
+public class PedidoService implements IPedidoRepository {
+    private final Map<Integer, Pedido> pedidos = new HashMap<>(); // Armazenamento em um mapa
 
     @Override
     public void salvar(int numeroPedido) {
-        Optional<Pedido> pedidoOptional = _pedidoRepository.buscarPorNumPedido(numeroPedido);
-        if (pedidoOptional.isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.PEDIDO_JA_CADASTRADO, "Pedido já cadastrado");
+        if (pedidos.containsKey(numeroPedido)) {
+            throw new ExceptionResponse(ErrorCodes.PEDIDO_JA_CADASTRADO, "Pedido " + numeroPedido + " já cadastrado.");
         }
-        _pedidoRepository.salvar(numeroPedido);
+        // Crie um novo pedido aqui com base no número, por exemplo:
+        Pedido novoPedido = new Pedido(numeroPedido); // Supondo que o Pedido tenha um construtor que aceita o número do pedido
+        pedidos.put(numeroPedido, novoPedido); // Adiciona o pedido ao mapa
     }
 
     @Override
     public void atualizarPedido(int numeroPedido) {
-        Optional<Pedido> pedidoOptional = _pedidoRepository.buscarPorNumPedido(numeroPedido);
-        if (!pedidoOptional.isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado");
+        if (!pedidos.containsKey(numeroPedido)) {
+            throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado.");
         }
-        _pedidoRepository.salvar(numeroPedido);
+        // Para atualizar, você pode modificar diretamente o objeto que já está no mapa ou substituí-lo
+        Pedido pedidoAtualizado = new Pedido(numeroPedido); // Crie o pedido atualizado conforme necessário
+        pedidos.put(numeroPedido, pedidoAtualizado); // Atualiza o pedido no mapa
     }
 
     @Override
-    public void deletarPedido(int numeroPedido) {
-        Optional<Pedido> pedidoOptional = _pedidoRepository.buscarPorNumPedido(numeroPedido);
-        if (!pedidoOptional.isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado");
+    public void deletar(int numeroPedido) {
+        if (!pedidos.containsKey(numeroPedido)) {
+            throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado.");
         }
-        _pedidoRepository.deletar(numeroPedido);
+        pedidos.remove(numeroPedido); // Remove o pedido do mapa
     }
 
     @Override
     public List<Pedido> buscarTodosPedidos() {
-        return _pedidoRepository.buscarTodosPedidos();
+        return List.copyOf(pedidos.values()); // Retorna todos os pedidos armazenados
     }
 
     @Override
-    public Pedido buscarPorNumPedido(int numeroPedido) {
-        Optional<Pedido> pedidoOptional = _pedidoRepository.buscarPorNumPedido(numeroPedido);
-        if (!pedidoOptional.isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado");
-        }
-        return pedidoOptional.get();
+    public Optional<Pedido> buscarPorNumPedido(int numeroPedido) {
+        return Optional.ofNullable(pedidos.get(numeroPedido)); // Retorna o pedido correspondente ou vazio
     }
-
 }
