@@ -12,12 +12,12 @@ public class UsuarioRepository implements IUsuarioRepository {
 
     @Override
     public void updateUsuario(Usuario usuario) {
-        // Implementação omitida
+
     }
 
     @Override
     public void deleteUsuario(Integer id) {
-        // Implementação omitida
+
     }
 
     @Override
@@ -26,22 +26,22 @@ public class UsuarioRepository implements IUsuarioRepository {
         Connection connectionMySQL = null;
         JdbcPreparedStatement jdbcPreparedStatement = null;
         ResultSet resultSet = null;
-        Usuario usuarioResult = null; // Inicializa como null
+        Usuario usuarioResult = null;
 
         try {
-            // Cria a conexão
+
             connectionMySQL = ConnectionFactory.createConnectionToMySQL();
 
-            // Prepara o comando SQL
+
             jdbcPreparedStatement = (JdbcPreparedStatement) connectionMySQL.prepareStatement(sql);
             jdbcPreparedStatement.setString(1, usuario);
 
-            // Executa a consulta
+
             resultSet = jdbcPreparedStatement.executeQuery();
 
-            // Se encontrar o usuário, cria o objeto e preenche os dados
+
             if (resultSet.next()) {
-                usuarioResult = new Usuario(); // Cria o objeto apenas se encontrar resultado
+                usuarioResult = new Usuario();
                 usuarioResult.setId(resultSet.getInt("id_usuario"));
                 usuarioResult.setNome(resultSet.getString("nome"));
                 usuarioResult.setEmail(resultSet.getString("email"));
@@ -67,7 +67,7 @@ public class UsuarioRepository implements IUsuarioRepository {
                 throw new RuntimeException("Erro ao fechar recursos", e);
             }
         }
-        return usuarioResult; // Retorna null se não encontrar o usuário
+        return usuarioResult;
     }
 
     @Override
@@ -77,10 +77,10 @@ public class UsuarioRepository implements IUsuarioRepository {
         JdbcPreparedStatement jdbcPreparedStatement = null;
 
         try {
-            // Cria a conexão
+
             connectionMySQL = ConnectionFactory.createConnectionToMySQL();
 
-            // Prepara o comando SQL
+
             jdbcPreparedStatement = (JdbcPreparedStatement) connectionMySQL.prepareStatement(sql);
             jdbcPreparedStatement.setString(1, usuario.getNome());
             jdbcPreparedStatement.setString(2, usuario.getEmail());
@@ -88,7 +88,7 @@ public class UsuarioRepository implements IUsuarioRepository {
             jdbcPreparedStatement.setString(4, usuario.getSenha());
             jdbcPreparedStatement.setString(5, usuario.getTelefone()); // Corrigido para usar o telefone
 
-            // Executa o comando
+
             jdbcPreparedStatement.executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException("Erro ao salvar usuário", e);
