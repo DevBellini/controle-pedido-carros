@@ -3,8 +3,6 @@ package br.devbellini.domain.model;
 import lombok.*;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
@@ -14,4 +12,9 @@ public class Cliente {
     private String cnpj;
     private String representante;
     private String telefone;
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

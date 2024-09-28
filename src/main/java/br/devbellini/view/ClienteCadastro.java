@@ -3,7 +3,7 @@ package br.devbellini.view;
 import br.devbellini.application.interfaces.IClienteService;
 import br.devbellini.application.service.ClienteService;
 import br.devbellini.domain.model.Cliente;
-import br.devbellini.domain.repository.ClienteCadastroRepository;
+import br.devbellini.domain.repository.ClienteRepository;
 import br.devbellini.infra.exception.ExceptionResponse;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ClienteCadastro extends JDialog {
-    private final IClienteService _clienteService = new ClienteService(new ClienteCadastroRepository());
+    private final IClienteService _clienteService = new ClienteService(new ClienteRepository());
     private JTextField campoEmpresa;
     private JTextField campoCNPJ;
     private JTextField campoResponsavel;

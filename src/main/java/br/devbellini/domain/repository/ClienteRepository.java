@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ClienteCadastroRepository implements IClienteRepository {
+public class ClienteRepository implements IClienteRepository {
 
     @Override
     public void salvar(Cliente cliente) {
@@ -80,7 +80,7 @@ public class ClienteCadastroRepository implements IClienteRepository {
     @Override
     public List<Cliente> buscarTodosClientes() {
         List<Cliente> clientes = new ArrayList<>();
-        String sql = "SELECT * FROM cliente";
+        String sql = "SELECT * FROM cliente"; // Verifique se essa tabela existe
         try (Connection connectionMySQL = ConnectionFactory.createConnectionToMySQL();
              PreparedStatement preparedStatement = connectionMySQL.prepareStatement(sql);
              ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -95,6 +95,7 @@ public class ClienteCadastroRepository implements IClienteRepository {
                 clientes.add(cliente);
             }
         } catch (Exception e) {
+            e.printStackTrace(); // Isso ajudará a identificar o problema
             throw new ExceptionResponse(ErrorCodes.ERRO_AO_BUSCAR_CLIENTES, "Erro ao buscar clientes: " + e.getMessage());
         }
         return clientes;

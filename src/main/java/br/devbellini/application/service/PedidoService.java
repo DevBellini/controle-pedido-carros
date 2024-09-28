@@ -3,13 +3,13 @@ package br.devbellini.application.service;
 import br.devbellini.domain.enums.ErrorCodes;
 import br.devbellini.domain.interfaces.IPedidoRepository;
 import br.devbellini.domain.model.Pedido;
+import br.devbellini.domain.repository.PedidoRepository;
 import br.devbellini.infra.exception.ExceptionResponse;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class PedidoService implements IPedidoRepository {
     private final Map<Integer, Pedido> pedidos = new HashMap<>(); // Armazenamento em um mapa
