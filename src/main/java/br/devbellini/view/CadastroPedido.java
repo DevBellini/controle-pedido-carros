@@ -1,8 +1,11 @@
 package br.devbellini.view;
 
 import br.devbellini.domain.interfaces.IClienteRepository;
+import br.devbellini.domain.interfaces.ICarroRepository;
 import br.devbellini.domain.model.Cliente;
+import br.devbellini.domain.model.Carro;
 import br.devbellini.domain.repository.ClienteRepository;
+import br.devbellini.domain.repository.CarroRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,12 +14,12 @@ import java.util.List;
 public class CadastroPedido extends JDialog {
     private JTextField campoNumPedido;
     private JPanel cadastroPedido;
-    private JButton salvarButton;
     private JComboBox<Cliente> comboBoxClientes;
     private JTextField campoCarro;
     private JList<String> campoLista;
     private JButton btnAdd;
     private JButton btnRemove;
+    private JComboBox<Carro> comboBoxCarros; // Alterado para Carro
     private DefaultListModel<String> listModel;
 
     public CadastroPedido(JFrame parent) {
@@ -35,6 +38,7 @@ public class CadastroPedido extends JDialog {
         btnRemove.addActionListener(e -> removerCarro());
 
         carregarClientes();
+        carregarCarros(); // Carregar carros no ComboBox
 
         setVisible(true);
     }
@@ -68,6 +72,19 @@ public class CadastroPedido extends JDialog {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar clientes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void carregarCarros() {
+        ICarroRepository carroRepository = new CarroRepository();
+        try {
+            List<Carro> carros = carroRepository.buscarTodos(); // Busca todos os carros
+
+            for (Carro carro : carros) {
+                comboBoxCarros.addItem(carro); // Adiciona cada carro ao ComboBox
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao buscar carros: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 

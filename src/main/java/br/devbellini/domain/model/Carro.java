@@ -16,4 +16,9 @@ public class Carro {
     private String cor;
     private float valor;
 
+    @Override
+    public String toString() {
+        return marca + " " + modelo;
+    }
+
 }
