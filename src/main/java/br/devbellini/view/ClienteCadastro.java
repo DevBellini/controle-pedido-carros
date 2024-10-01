@@ -47,12 +47,17 @@ public class ClienteCadastro extends JDialog {
 
         if (nome.isEmpty() || cnpj.isEmpty() || responsavel.isEmpty() || telefone.isEmpty()) {
             JOptionPane.showMessageDialog(this,
-                    "Por favor, entre com todos os campos\n" +
-                            "Tente novamente");
+                    "Por favor, preencha todos os campos.\n" +
+                            "Tente novamente.");
             return;
         }
 
-        // Criação do objeto Cliente e preenchimento dos dados
+        if (!validarCNPJ(cnpj)) {
+            JOptionPane.showMessageDialog(this,
+                    "CNPJ inválido. Por favor, insira um CNPJ válido.");
+            return;
+        }
+
         Cliente clienteCadastrar = new Cliente();
         clienteCadastrar.setNome(nome);
         clienteCadastrar.setCnpj(cnpj);
@@ -62,13 +67,23 @@ public class ClienteCadastro extends JDialog {
         try {
             _clienteService.salvar(clienteCadastrar);
             JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso");
-            dispose(); // Fecha a janela após salvar com sucesso
+            dispose();
         } catch (ExceptionResponse e) {
-            JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro ao salvar cliente: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocorreu um erro inesperado: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    // Para testar a classe
+    private boolean validarCNPJ(String cnpj) {
+        cnpj = cnpj.replaceAll("[^\\d]", "");
+        if (cnpj.length() != 14) {
+            return false;
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         ClienteCadastro cadastroCliente = new ClienteCadastro(null);
     }

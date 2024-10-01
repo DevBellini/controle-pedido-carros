@@ -52,7 +52,7 @@ public class UsuarioRepository implements IUsuarioRepository {
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar usuário", e);
         } finally {
-            // Fecha recursos
+
             try {
                 if (resultSet != null) {
                     resultSet.close();
@@ -86,7 +86,7 @@ public class UsuarioRepository implements IUsuarioRepository {
             jdbcPreparedStatement.setString(2, usuario.getEmail());
             jdbcPreparedStatement.setString(3, usuario.getUsuario());
             jdbcPreparedStatement.setString(4, usuario.getSenha());
-            jdbcPreparedStatement.setString(5, usuario.getTelefone()); // Corrigido para usar o telefone
+            jdbcPreparedStatement.setString(5, usuario.getTelefone());
 
 
             jdbcPreparedStatement.executeUpdate();

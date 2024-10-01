@@ -17,7 +17,7 @@ public class ClienteRepository implements IClienteRepository {
 
     @Override
     public void salvar(Cliente cliente) {
-        // Verifica se o cliente já está cadastrado
+
         if (buscarPorCnpj(cliente.getCnpj()).isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_JA_CADASTRADO, "Cliente já cadastrado.");
         }
@@ -39,7 +39,7 @@ public class ClienteRepository implements IClienteRepository {
 
     @Override
     public void atualizarCliente(Cliente cliente) {
-        // Verifica se o cliente existe
+
         if (!buscarPorCnpj(cliente.getCnpj()).isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado.");
         }
@@ -61,7 +61,7 @@ public class ClienteRepository implements IClienteRepository {
 
     @Override
     public void deletarCliente(String cnpj) {
-        // Verifica se o cliente existe
+
         if (!buscarPorCnpj(cnpj).isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado.");
         }

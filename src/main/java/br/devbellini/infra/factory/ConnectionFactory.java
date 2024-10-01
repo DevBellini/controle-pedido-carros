@@ -6,16 +6,12 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-    // Nome de usuário do MySQL
     private static final String USERNAME = "root";
 
-    // Senha do MySQL
     private static final String PASSWORD = "";
 
-    // URL de conexão com o banco de dados MySQL
     private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/ManengerDB";
 
-    // Método para criar a conexão com o MySQL
     public static Connection createConnectionToMySQL() {
         try {
             // Carrega o driver do MySQL
@@ -26,7 +22,6 @@ public class ConnectionFactory {
 
         Connection connection = null;
         try {
-            // Tenta estabelecer uma conexão com o banco de dados
             connection = DriverManager.getConnection(DATABASE_URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException("Erro ao conectar ao MySQL", e);
@@ -34,7 +29,6 @@ public class ConnectionFactory {
         return connection;
     }
 
-    // Método principal para testar a conexão
     public static void main(String[] args) {
         Connection con = createConnectionToMySQL();
         if (con != null) {

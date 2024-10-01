@@ -33,7 +33,6 @@ public class LoginForm extends JDialog {
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        // Adiciona o listener para o botão Entrar
         btnEntrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,16 +40,15 @@ public class LoginForm extends JDialog {
             }
         });
 
-        // Adiciona o listener para o botão Registrar
         btnRegistrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                Registro registroForm = new Registro(null); // Chama a tela de registro
+                Registro registroForm = new Registro(null);
             }
         });
 
-        setVisible(true); // Torna o formulário visível
+        setVisible(true);
     }
 
     private void loginUser() {
@@ -83,7 +81,4 @@ public class LoginForm extends JDialog {
         // ShowtimeForm showtimeForm = new ShowtimeForm(null); // Caso queira chamar outra tela após login
     }
 
-//    public static void main(String[] args) {
-//        LoginForm loginForm = new LoginForm(null);
-//    }
 }

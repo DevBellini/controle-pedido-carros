@@ -12,16 +12,15 @@ import java.util.Map;
 import java.util.Optional;
 
 public class PedidoService implements IPedidoRepository {
-    private final Map<Integer, Pedido> pedidos = new HashMap<>(); // Armazenamento em um mapa
+    private final Map<Integer, Pedido> pedidos = new HashMap<>();
 
     @Override
     public void salvar(int numeroPedido) {
         if (pedidos.containsKey(numeroPedido)) {
             throw new ExceptionResponse(ErrorCodes.PEDIDO_JA_CADASTRADO, "Pedido " + numeroPedido + " já cadastrado.");
         }
-        // Crie um novo pedido aqui com base no número, por exemplo:
-        Pedido novoPedido = new Pedido(numeroPedido); // Supondo que o Pedido tenha um construtor que aceita o número do pedido
-        pedidos.put(numeroPedido, novoPedido); // Adiciona o pedido ao mapa
+        Pedido novoPedido = new Pedido(numeroPedido);
+        pedidos.put(numeroPedido, novoPedido);
     }
 
     @Override
@@ -29,9 +28,8 @@ public class PedidoService implements IPedidoRepository {
         if (!pedidos.containsKey(numeroPedido)) {
             throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado.");
         }
-        // Para atualizar, você pode modificar diretamente o objeto que já está no mapa ou substituí-lo
-        Pedido pedidoAtualizado = new Pedido(numeroPedido); // Crie o pedido atualizado conforme necessário
-        pedidos.put(numeroPedido, pedidoAtualizado); // Atualiza o pedido no mapa
+        Pedido pedidoAtualizado = new Pedido(numeroPedido);
+        pedidos.put(numeroPedido, pedidoAtualizado);
     }
 
     @Override
@@ -39,16 +37,16 @@ public class PedidoService implements IPedidoRepository {
         if (!pedidos.containsKey(numeroPedido)) {
             throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado.");
         }
-        pedidos.remove(numeroPedido); // Remove o pedido do mapa
+        pedidos.remove(numeroPedido);
     }
 
     @Override
     public List<Pedido> buscarTodosPedidos() {
-        return List.copyOf(pedidos.values()); // Retorna todos os pedidos armazenados
+        return List.copyOf(pedidos.values());
     }
 
     @Override
     public Optional<Pedido> buscarPorNumPedido(int numeroPedido) {
-        return Optional.ofNullable(pedidos.get(numeroPedido)); // Retorna o pedido correspondente ou vazio
+        return Optional.ofNullable(pedidos.get(numeroPedido));
     }
 }

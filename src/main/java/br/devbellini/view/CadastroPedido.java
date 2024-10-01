@@ -12,12 +12,12 @@ public class CadastroPedido extends JDialog {
     private JTextField campoNumPedido;
     private JPanel cadastroPedido;
     private JButton salvarButton;
-    private JComboBox<Cliente> comboBoxClientes; // Combobox de clientes
-    private JTextField campoCarro; // Campo para inserir o nome do carro
-    private JList<String> campoLista; // Lista de carros adicionados
-    private JButton btnAdd; // Botão para adicionar carro à lista
-    private JButton btnRemove; // Botão para remover carro da lista
-    private DefaultListModel<String> listModel; // Modelo da lista
+    private JComboBox<Cliente> comboBoxClientes;
+    private JTextField campoCarro;
+    private JList<String> campoLista;
+    private JButton btnAdd;
+    private JButton btnRemove;
+    private DefaultListModel<String> listModel;
 
     public CadastroPedido(JFrame parent) {
         super(parent);
@@ -28,34 +28,31 @@ public class CadastroPedido extends JDialog {
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        // Inicializa o modelo da lista de carros
         listModel = new DefaultListModel<>();
         campoLista.setModel(listModel);
 
-        // Configura os botões de adicionar e remover carro
         btnAdd.addActionListener(e -> adicionarCarro());
         btnRemove.addActionListener(e -> removerCarro());
 
-        // Carrega os clientes no comboBox
         carregarClientes();
 
         setVisible(true);
     }
 
     private void adicionarCarro() {
-        String carro = campoCarro.getText(); // Obtém o nome do carro inserido no textField1
+        String carro = campoCarro.getText();
         if (!carro.isEmpty()) {
-            listModel.addElement(carro); // Adiciona o carro à lista
-            campoCarro.setText(""); // Limpa o campo de entrada
+            listModel.addElement(carro);
+            campoCarro.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Insira um nome de carro válido.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void removerCarro() {
-        int selectedIndex = campoLista.getSelectedIndex(); // Obtém o índice do item selecionado
-        if (selectedIndex != -1) { // Verifica se algum item está selecionado
-            listModel.remove(selectedIndex); // Remove o item selecionado da lista
+        int selectedIndex = campoLista.getSelectedIndex();
+        if (selectedIndex != -1) {
+            listModel.remove(selectedIndex);
         } else {
             JOptionPane.showMessageDialog(this, "Selecione um carro para remover.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -64,12 +61,10 @@ public class CadastroPedido extends JDialog {
     private void carregarClientes() {
         IClienteRepository clienteRepository = new ClienteRepository();
         try {
-            // Buscando todos os clientes no repositório
             List<Cliente> clientes = clienteRepository.buscarTodosClientes();
 
-            // Adicionando os clientes ao JComboBox
             for (Cliente cliente : clientes) {
-                comboBoxClientes.addItem(cliente); // Adiciona o cliente ao comboBox
+                comboBoxClientes.addItem(cliente);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar clientes: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);

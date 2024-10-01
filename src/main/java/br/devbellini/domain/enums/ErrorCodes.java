@@ -9,9 +9,9 @@ public enum ErrorCodes {
     CLIENTE_NÃO_CADASTRADO("Cliente não cadastrado."),
     USUARIO_NAO_CADASTRADO("Usuário não cadastrado."),
     ERRO_AO_DELETAR_CLIENTE("Erro ao deletar cliente."),
-    ERRO_AO_BUSCAR_CLIENTES("Erro ao buscar cliente");
-
-
+    ERRO_AO_BUSCAR_CLIENTES("Erro ao buscar cliente"),
+    CARRO_JA_CADASTRADO("Carro ja cadastrado"),
+    CARRO_NAO_CADASTRADO("Carro não cadastrado");
 
 
 
