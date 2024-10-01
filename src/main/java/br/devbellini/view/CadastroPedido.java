@@ -20,6 +20,7 @@ public class CadastroPedido extends JDialog {
     private JButton btnAdd;
     private JButton btnRemove;
     private JComboBox<Carro> comboBoxCarros; // Alterado para Carro
+    private JButton criarPedidoButton;
     private DefaultListModel<String> listModel;
 
     public CadastroPedido(JFrame parent) {
