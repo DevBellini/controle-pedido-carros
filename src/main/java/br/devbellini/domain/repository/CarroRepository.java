@@ -41,7 +41,7 @@ public class CarroRepository implements ICarroRepository {
     @Override
     public void atualizarCarro(Carro carro) {
 
-        if (!buscarPorId(carro.getId()).isPresent()) {
+        if (!buscarPorId(carro.getId_carro()).isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CARRO_NAO_CADASTRADO, "Carro não cadastrado.");
         }
 
@@ -54,7 +54,7 @@ public class CarroRepository implements ICarroRepository {
             preparedStatement.setInt(3, carro.getAno());
             preparedStatement.setString(4, carro.getCor());
             preparedStatement.setFloat(5, carro.getValor());
-            preparedStatement.setInt(6, carro.getId());
+            preparedStatement.setInt(6, carro.getId_carro());
 
             preparedStatement.executeUpdate();
         } catch (Exception e) {
@@ -96,7 +96,7 @@ public class CarroRepository implements ICarroRepository {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     Carro carro = new Carro();
-                    carro.setId(resultSet.getInt("id_carro"));
+                    carro.setId_carro(resultSet.getInt("id_carro"));
                     carro.setMarca(resultSet.getString("marca"));
                     carro.setModelo(resultSet.getString("modelo"));
                     carro.setAno(resultSet.getInt("ano"));
@@ -112,7 +112,7 @@ public class CarroRepository implements ICarroRepository {
     }
 
     @Override
-    public List<Carro> buscarTodos() {
+    public List<Carro> buscarTodosCarros() {
         List<Carro> carros = new ArrayList<>();
         String sql = "SELECT * FROM carro";
         try (Connection connectionMySQL = ConnectionFactory.createConnectionToMySQL();
@@ -121,7 +121,7 @@ public class CarroRepository implements ICarroRepository {
 
             while (resultSet.next()) {
                 Carro carro = new Carro();
-                carro.setId(resultSet.getInt("id_carro"));
+                carro.setId_carro(resultSet.getInt("id_carro"));
                 carro.setMarca(resultSet.getString("marca"));
                 carro.setModelo(resultSet.getString("modelo"));
                 carro.setAno(resultSet.getInt("ano"));
@@ -146,7 +146,7 @@ public class CarroRepository implements ICarroRepository {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Carro carro = new Carro();
-                    carro.setId(resultSet.getInt("id_carro"));
+                    carro.setId_carro(resultSet.getInt("id_carro"));
                     carro.setMarca(resultSet.getString("marca"));
                     carro.setModelo(resultSet.getString("modelo"));
                     carro.setAno(resultSet.getInt("ano"));
@@ -172,7 +172,7 @@ public class CarroRepository implements ICarroRepository {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Carro carro = new Carro();
-                    carro.setId(resultSet.getInt("id_carro"));
+                    carro.setId_carro(resultSet.getInt("id_carro"));
                     carro.setMarca(resultSet.getString("marca"));
                     carro.setModelo(resultSet.getString("modelo"));
                     carro.setAno(resultSet.getInt("ano"));
@@ -200,7 +200,7 @@ public class CarroRepository implements ICarroRepository {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
                     Carro carro = new Carro();
-                    carro.setId(resultSet.getInt("id_carro"));
+                    carro.setId_carro(resultSet.getInt("id_carro"));
                     carro.setMarca(resultSet.getString("marca"));
                     carro.setModelo(resultSet.getString("modelo"));
                     carro.setAno(resultSet.getInt("ano"));

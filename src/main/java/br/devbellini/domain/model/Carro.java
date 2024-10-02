@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Carro {
 
-    private Integer id;
+    private Integer id_carro;
     private String marca;
     private String modelo;
     private int ano;
@@ -18,7 +18,7 @@ public class Carro {
 
     @Override
     public String toString() {
-        return marca + " " + modelo;
+        return marca + " - " + modelo + " - " + ano + " - " + cor + " - " + valor;
     }
 
 }

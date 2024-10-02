@@ -28,7 +28,7 @@ public class CarroService implements ICarroService {
 
     @Override
     public void atualizarCarro(Carro carro) {
-        Optional<Carro> optionalCarro = _carroRepository.buscarPorId(carro.getId());
+        Optional<Carro> optionalCarro = _carroRepository.buscarPorId(carro.getId_carro());
 
         if (!optionalCarro.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CARRO_NAO_CADASTRADO, "Carro não cadastrado.");
@@ -57,8 +57,8 @@ public class CarroService implements ICarroService {
     }
 
     @Override
-    public List<Carro> buscarTodos() {
-        List<Carro> carros = _carroRepository.buscarTodos();
+    public List<Carro> buscarTodosCarros() {
+        List<Carro> carros = _carroRepository.buscarTodosCarros();
 
         if (carros.isEmpty()) {
             throw new ExceptionResponse(ErrorCodes.CARRO_NAO_CADASTRADO, "Nenhum carro encontrado.");

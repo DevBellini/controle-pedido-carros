@@ -26,7 +26,7 @@ public class PedidoService implements IPedidoRepository {
     @Override
     public void atualizarPedido(int numeroPedido) {
         if (!pedidos.containsKey(numeroPedido)) {
-            throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado.");
+            throw new ExceptionResponse(ErrorCodes.PEDIDO_NAO_CADASTRADO, "Pedido não cadastrado.");
         }
         Pedido pedidoAtualizado = new Pedido(numeroPedido);
         pedidos.put(numeroPedido, pedidoAtualizado);
@@ -35,7 +35,7 @@ public class PedidoService implements IPedidoRepository {
     @Override
     public void deletar(int numeroPedido) {
         if (!pedidos.containsKey(numeroPedido)) {
-            throw new ExceptionResponse(ErrorCodes.PEDIDO_NÃO_CADASTRADO, "Pedido não cadastrado.");
+            throw new ExceptionResponse(ErrorCodes.PEDIDO_NAO_CADASTRADO, "Pedido não cadastrado.");
         }
         pedidos.remove(numeroPedido);
     }

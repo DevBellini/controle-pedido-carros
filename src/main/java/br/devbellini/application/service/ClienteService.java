@@ -30,7 +30,7 @@ public class ClienteService implements IClienteService {
     public void atualizarCliente(Cliente cliente) {
         Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cliente.getCnpj());
         if (!clienteOptional.isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado");
+            throw new ExceptionResponse(ErrorCodes.CLIENTE_NAO_CADASTRADO, "Cliente não cadastrado");
         }
         _clienteRepository.atualizarCliente(cliente);
     }
@@ -39,7 +39,7 @@ public class ClienteService implements IClienteService {
     public void deletarCliente(String cnpj) {
         Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cnpj);
         if (!clienteOptional.isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado");
+            throw new ExceptionResponse(ErrorCodes.CLIENTE_NAO_CADASTRADO, "Cliente não cadastrado");
         }
         _clienteRepository.deletarCliente(cnpj);
     }
@@ -53,7 +53,7 @@ public class ClienteService implements IClienteService {
     public Optional<Cliente> buscarPorCnpj(String cnpj) {
         Optional<Cliente> clienteOptional = _clienteRepository.buscarPorCnpj(cnpj);
         if (!clienteOptional.isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado");
+            throw new ExceptionResponse(ErrorCodes.CLIENTE_NAO_CADASTRADO, "Cliente não cadastrado");
         }
         return clienteOptional;
     }

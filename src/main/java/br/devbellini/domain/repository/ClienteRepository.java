@@ -41,7 +41,7 @@ public class ClienteRepository implements IClienteRepository {
     public void atualizarCliente(Cliente cliente) {
 
         if (!buscarPorCnpj(cliente.getCnpj()).isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado.");
+            throw new ExceptionResponse(ErrorCodes.CLIENTE_NAO_CADASTRADO, "Cliente não cadastrado.");
         }
 
         String sql = "UPDATE cliente SET nome = ?, representante = ?, telefone = ? WHERE cnpj = ?";
@@ -63,7 +63,7 @@ public class ClienteRepository implements IClienteRepository {
     public void deletarCliente(String cnpj) {
 
         if (!buscarPorCnpj(cnpj).isPresent()) {
-            throw new ExceptionResponse(ErrorCodes.CLIENTE_NÃO_CADASTRADO, "Cliente não cadastrado.");
+            throw new ExceptionResponse(ErrorCodes.CLIENTE_NAO_CADASTRADO, "Cliente não cadastrado.");
         }
 
         String sql = "DELETE FROM cliente WHERE cnpj = ?";

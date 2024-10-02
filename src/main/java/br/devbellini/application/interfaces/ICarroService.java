@@ -15,7 +15,7 @@ public interface ICarroService {
 
     List<Carro> buscarCarros(String marca, String modelo, int ano, String cor, float valor);
 
-    List<Carro> buscarTodos();
+    List<Carro> buscarTodosCarros();
 
     Optional<Carro> buscarPorModelo(String modelo);
 

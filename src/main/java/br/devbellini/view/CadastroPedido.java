@@ -2,10 +2,13 @@ package br.devbellini.view;
 
 import br.devbellini.domain.interfaces.IClienteRepository;
 import br.devbellini.domain.interfaces.ICarroRepository;
+import br.devbellini.domain.interfaces.IPedidoRepository;
 import br.devbellini.domain.model.Cliente;
 import br.devbellini.domain.model.Carro;
+import br.devbellini.domain.model.Pedido;
 import br.devbellini.domain.repository.ClienteRepository;
 import br.devbellini.domain.repository.CarroRepository;
+import br.devbellini.domain.repository.PedidoRepository;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +22,7 @@ public class CadastroPedido extends JDialog {
     private JList<String> campoLista;
     private JButton btnAdd;
     private JButton btnRemove;
-    private JComboBox<Carro> comboBoxCarros; // Alterado para Carro
+    private JComboBox<Carro> comboBoxCarros;
     private JButton criarPedidoButton;
     private DefaultListModel<String> listModel;
 
@@ -27,7 +30,7 @@ public class CadastroPedido extends JDialog {
         super(parent);
         setTitle("Cadastro de Pedido");
         setContentPane(cadastroPedido);
-        setMinimumSize(new Dimension(600, 600));
+        setMinimumSize(new Dimension(900, 600));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -38,19 +41,20 @@ public class CadastroPedido extends JDialog {
         btnAdd.addActionListener(e -> adicionarCarro());
         btnRemove.addActionListener(e -> removerCarro());
 
+        criarPedidoButton.addActionListener(e -> criarPedido());
+
         carregarClientes();
-        carregarCarros(); // Carregar carros no ComboBox
+        carregarCarros();
 
         setVisible(true);
     }
 
     private void adicionarCarro() {
-        String carro = campoCarro.getText();
-        if (!carro.isEmpty()) {
-            listModel.addElement(carro);
-            campoCarro.setText("");
+        Carro carroSelecionado = (Carro) comboBoxCarros.getSelectedItem();
+        if (carroSelecionado != null) {
+            listModel.addElement(carroSelecionado.toString());
         } else {
-            JOptionPane.showMessageDialog(this, "Insira um nome de carro válido.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Selecione um carro válido.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -79,13 +83,43 @@ public class CadastroPedido extends JDialog {
     private void carregarCarros() {
         ICarroRepository carroRepository = new CarroRepository();
         try {
-            List<Carro> carros = carroRepository.buscarTodos(); // Busca todos os carros
+            List<Carro> carros = carroRepository.buscarTodosCarros();
 
             for (Carro carro : carros) {
-                comboBoxCarros.addItem(carro); // Adiciona cada carro ao ComboBox
+                comboBoxCarros.addItem(carro);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao buscar carros: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void criarPedido() {
+        int numeroPedido;
+        try {
+            numeroPedido = Integer.parseInt(campoNumPedido.getText()); // Supondo que o campo para número do pedido seja um JTextField
+            Cliente clienteSelecionado = (Cliente) comboBoxClientes.getSelectedItem();
+
+            if (clienteSelecionado == null) {
+                JOptionPane.showMessageDialog(this, "Selecione um cliente.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Pedido pedido = new Pedido();
+            pedido.setNumeroPedido(numeroPedido);
+            pedido.setCliente(String.valueOf(clienteSelecionado));
+
+            // Adiciona os carros selecionados à lista de pedidos, se necessário
+            // Lógica para adicionar os carros ao pedido pode ser implementada aqui
+
+            IPedidoRepository pedidoRepository = new PedidoRepository();
+           // pedidoRepository.salvar(pedido);
+            JOptionPane.showMessageDialog(this, "Pedido criado com sucesso!");
+            dispose(); // Fecha a janela após o sucesso
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Número do pedido inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao criar pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
 
