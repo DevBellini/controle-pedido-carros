@@ -11,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ClienteCadastro extends JDialog {
+public class CadastroCliente extends JDialog {
     private final IClienteService _clienteService = new ClienteService(new ClienteRepository());
     private JTextField campoEmpresa;
     private JTextField campoCNPJ;
@@ -20,7 +20,7 @@ public class ClienteCadastro extends JDialog {
     private JPanel cadastroCliente;
     private JButton salvarButton;
 
-    public ClienteCadastro(JFrame parent) {
+    public CadastroCliente(JFrame parent) {
         super(parent);
         setTitle("Cadastro de Cliente");
         setContentPane(cadastroCliente);
@@ -85,6 +85,6 @@ public class ClienteCadastro extends JDialog {
     }
 
     public static void main(String[] args) {
-        ClienteCadastro cadastroCliente = new ClienteCadastro(null);
+        CadastroCliente cadastroCliente = new CadastroCliente(null);
     }
 }
