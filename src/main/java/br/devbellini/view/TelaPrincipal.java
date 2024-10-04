@@ -2,11 +2,13 @@ package br.devbellini.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TelaPrincipal extends JDialog {
     private JPanel telaPrincipal;
     private JLabel bemVindo;
-    private JMenu menuCliente, menuPedido, menuUsuario, menuCarro;
+    private JMenu menuUsuario, menuCarro, menuCliente, menuPedido;
     private JMenuBar menuBar;
     private JMenuItem cadastrarCliente, consultarCliente, editarCliente;
     private JMenuItem cadastrarPedido, consultarPedido, editarPedido;
@@ -58,6 +60,32 @@ public class TelaPrincipal extends JDialog {
         menuBar.add(menuCarro);
 
         setJMenuBar(menuBar);
+
+
+        cadastrarCliente.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                CadastroCliente cadastroCliente = new CadastroCliente(null);
+            }
+        });
+
+        cadastrarCarro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                CadastroCarro cadastroCarro = new CadastroCarro(null);
+            }
+        });
+
+        cadastrarPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                CadastroPedido cadastrarPedido = new CadastroPedido(null);
+            }
+        });
+
 
         setVisible(true);
     }
