@@ -96,7 +96,7 @@ public class CadastroPedido extends JDialog {
     private void criarPedido() {
         int numeroPedido;
         try {
-            numeroPedido = Integer.parseInt(campoNumPedido.getText()); // Supondo que o campo para número do pedido seja um JTextField
+            numeroPedido = Integer.parseInt(campoNumPedido.getText());
             Cliente clienteSelecionado = (Cliente) comboBoxClientes.getSelectedItem();
 
             if (clienteSelecionado == null) {
@@ -108,11 +108,9 @@ public class CadastroPedido extends JDialog {
             pedido.setNumeroPedido(numeroPedido);
             pedido.setCliente(String.valueOf(clienteSelecionado));
 
-            // Adiciona os carros selecionados à lista de pedidos, se necessário
-            // Lógica para adicionar os carros ao pedido pode ser implementada aqui
+
 
             IPedidoRepository pedidoRepository = new PedidoRepository();
-           // pedidoRepository.salvar(pedido);
             JOptionPane.showMessageDialog(this, "Pedido criado com sucesso!");
             dispose(); // Fecha a janela após o sucesso
 
@@ -123,7 +121,7 @@ public class CadastroPedido extends JDialog {
         }
     }
 
-    public static void main(String[] args) {
-        CadastroPedido cadastroPedido = new CadastroPedido(null);
-    }
+//    public static void main(String[] args) {
+//        CadastroPedido cadastroPedido = new CadastroPedido(null);
+//    }
 }

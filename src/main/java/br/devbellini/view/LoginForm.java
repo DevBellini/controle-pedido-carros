@@ -78,7 +78,7 @@ public class LoginForm extends JDialog {
                 "Login feito com sucesso");
 
         dispose();
-        // ShowtimeForm showtimeForm = new ShowtimeForm(null); // Caso queira chamar outra tela após login
+        TelaPrincipal telaPrincipal = new TelaPrincipal(null);
     }
 
 }

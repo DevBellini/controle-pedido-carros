@@ -44,6 +44,8 @@ public class Registro extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                LoginForm loginForm = new LoginForm(null);
+
             }
         });
         setVisible(true);
@@ -88,6 +90,7 @@ public class Registro extends JDialog {
         }
         JOptionPane.showMessageDialog(this, "Registro feito com sucesso");
         dispose();
+        LoginForm loginForm = new LoginForm(null);
 
     }
 

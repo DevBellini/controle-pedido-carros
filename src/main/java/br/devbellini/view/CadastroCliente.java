@@ -33,6 +33,7 @@ public class CadastroCliente extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RegistrarCliente();
+                 TelaPrincipal telaPrincipal = new TelaPrincipal(null);
             }
         });
 
@@ -84,7 +85,7 @@ public class CadastroCliente extends JDialog {
         return true;
     }
 
-    public static void main(String[] args) {
-        CadastroCliente cadastroCliente = new CadastroCliente(null);
-    }
+//    public static void main(String[] args) {
+//        CadastroCliente cadastroCliente = new CadastroCliente(null);
+//    }
 }

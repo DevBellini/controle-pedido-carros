@@ -35,6 +35,7 @@ public class CadastroCarro extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RegistrarCarro();
+                TelaPrincipal telaPrincipal = new TelaPrincipal(null);
             }
         });
 
@@ -90,7 +91,7 @@ public class CadastroCarro extends JDialog {
         }
     }
 
-    public static void main(String[] args) {
-        CadastroCarro cadastroCarro = new CadastroCarro(null);
-    }
+//    public static void main(String[] args) {
+//        CadastroCarro cadastroCarro = new CadastroCarro(null);
+//    }
 }
