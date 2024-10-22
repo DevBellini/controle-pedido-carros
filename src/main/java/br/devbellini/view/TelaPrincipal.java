@@ -104,6 +104,16 @@ public class TelaPrincipal extends JDialog {
             }
         });
 
+        editarUsuario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ConsultaUsuario consultaUsuario = new ConsultaUsuario(null);
+            }
+        });
+
+
+
         setVisible(true);
     }
 
