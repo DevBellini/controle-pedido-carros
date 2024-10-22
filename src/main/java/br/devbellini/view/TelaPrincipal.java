@@ -96,6 +96,13 @@ public class TelaPrincipal extends JDialog {
             }
         });
 
+        consultarCarro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ConsultaCarro consultaCarro = new ConsultaCarro(null);
+            }
+        });
 
         setVisible(true);
     }
