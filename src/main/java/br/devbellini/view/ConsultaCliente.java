@@ -11,6 +11,7 @@ public class ConsultaCliente extends JDialog{
     private JTextField campoTelefone;
     private JButton btnEditar;
     private JButton btnSalvar;
+    private JButton btnPesquisar;
 
     public ConsultaCliente(JFrame parent) {
         super(parent);
