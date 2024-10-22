@@ -80,6 +80,14 @@ public class TelaPrincipal extends JDialog {
             }
         });
 
+        consultarPedido.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                ConsultaPedido consultaPedido = new ConsultaPedido(null);
+            }
+        });
+
 
         setVisible(true);
     }

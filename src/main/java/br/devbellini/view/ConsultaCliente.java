@@ -4,15 +4,19 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ConsultaCliente extends JDialog{
-    private JTextField campoPesquisarCliente;
-    private JButton pesquisarClienteButton;
     private JPanel consultaCliente;
+    private JTextField campoEmpresa;
+    private JTextField campoCNPJ;
+    private JTextField campoResponsavel;
+    private JTextField campoTelefone;
+    private JButton btnEditar;
+    private JButton btnSalvar;
 
     public ConsultaCliente(JFrame parent) {
         super(parent);
         setTitle("ConsultaPedido");
         setContentPane(consultaCliente);
-        setMinimumSize(new Dimension(600,600));
+        setMinimumSize(new Dimension(600,500));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
