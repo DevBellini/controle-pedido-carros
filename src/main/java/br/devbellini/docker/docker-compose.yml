@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: ManengerDB
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - C:\Users\Bellini\Desktop\controle-pedido-carros\src\main\resources\init.sql:/docker-entrypoint-initdb.d/init.sql  # Mapeando o arquivo init.sql
+      - mysql_data:/var/lib/mysql  # Persistindo os dados
+
+volumes:
+  mysql_data:
