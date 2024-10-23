@@ -17,7 +17,7 @@ public class ConsultaCarro extends JDialog {
         super(parent);
         setTitle("Consulta Carro");
         setContentPane(consultaCarro);
-        setMinimumSize(new Dimension(600,500));
+        setMinimumSize(new Dimension(600,600));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

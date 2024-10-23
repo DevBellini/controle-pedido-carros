@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 public class TelaPrincipal extends JDialog {
     private JPanel telaPrincipal;
     private JLabel bemVindo;
+    private JLabel carrinho;
+    private JLabel pedido;
     private JMenu menuUsuario, menuCarro, menuCliente, menuPedido;
     private JMenuBar menuBar;
     private JMenuItem cadastrarCliente, consultarCliente;
