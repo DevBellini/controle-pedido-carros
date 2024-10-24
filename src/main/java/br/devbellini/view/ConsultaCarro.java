@@ -2,6 +2,8 @@ package br.devbellini.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ConsultaCarro extends JDialog {
     private JPanel consultaCarro;
@@ -12,20 +14,16 @@ public class ConsultaCarro extends JDialog {
     private JTextField campoCor;
     private JButton btnSalvar;
     private JButton btnPesquisar;
+    private JButton btnVoltar;
 
     public ConsultaCarro(JFrame parent) {
         super(parent);
         setTitle("Consulta Carro");
         setContentPane(consultaCarro);
-        setMinimumSize(new Dimension(600,600));
+        setMinimumSize(new Dimension(600, 600));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
     }
-
-    public static void main(String[] args) {
-        ConsultaCarro consultaCarro = new ConsultaCarro(null);
-    }
-
 }

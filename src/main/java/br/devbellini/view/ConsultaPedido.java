@@ -2,11 +2,13 @@ package br.devbellini.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ConsultaPedido extends  JDialog{
     private JTextField campoCliente;
     private JList itensPedido;
-    private JButton btnEditar;
+    private JButton btnVoltar;
     private JTextField campoValor;
     private JButton btnPesquisar;
     private JLabel iconConsulta;
@@ -16,6 +18,7 @@ public class ConsultaPedido extends  JDialog{
     private JButton btnSalvar;
     private JLabel iconPedido;
     private JTextField numeroPedido;
+    private JButton btnEditarPedido;
     private JButton btnSave;
 
     public ConsultaPedido(JFrame parent) {
@@ -27,10 +30,6 @@ public class ConsultaPedido extends  JDialog{
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        ConsultaPedido consultaPedido = new ConsultaPedido(null);
     }
 }
 

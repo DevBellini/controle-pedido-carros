@@ -2,6 +2,8 @@ package br.devbellini.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ConsultaUsuario extends JDialog {
     private JLabel repetirSenha;
@@ -12,22 +14,20 @@ public class ConsultaUsuario extends JDialog {
     private JTextField campoTelefone;
     private JPasswordField campoSenha;
     private JPasswordField campoRepSenha;
-    private JButton btnEdit;
-    private JButton btnSave;
+    private JButton btnEditar;
+    private JButton btnSalvar;
     private JPanel consultaUsuario;
+    private JButton btnVoltar;
 
     public ConsultaUsuario(JFrame parent) {
         super(parent);
         setTitle("Consulta Carro");
         setContentPane(consultaUsuario);
-        setMinimumSize(new Dimension(600,600));
+        setMinimumSize(new Dimension(600, 600));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setVisible(true);
-    }
 
-    public static void main(String[] args) {
-        ConsultaUsuario consultaUsuario = new ConsultaUsuario(null);
     }
 }

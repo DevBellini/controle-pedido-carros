@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="br.devbellini.view.ConsultaUsuario">
-  <grid id="27dc6" binding="consultaUsuario" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="consultaUsuario" layout-manager="GridLayoutManager" row-count="10" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="591" height="548"/>
+      <xy x="20" y="20" width="591" height="594"/>
     </constraints>
     <properties>
       <background color="-10883590"/>
@@ -179,7 +179,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="2be96" class="javax.swing.JButton" binding="btnEdit">
+      <component id="2be96" class="javax.swing.JButton" binding="btnEditar">
         <constraints>
           <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -188,13 +188,22 @@
           <text value="Editar"/>
         </properties>
       </component>
-      <component id="86d93" class="javax.swing.JButton" binding="btnSave">
+      <component id="86d93" class="javax.swing.JButton" binding="btnSalvar">
         <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Segoe Print" size="20" style="1"/>
           <text value="Salvar"/>
+        </properties>
+      </component>
+      <component id="7f132" class="javax.swing.JButton" binding="btnVoltar">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Segoe Print" size="20" style="1"/>
+          <text value="Voltar"/>
         </properties>
       </component>
     </children>

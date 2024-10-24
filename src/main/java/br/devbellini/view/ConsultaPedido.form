@@ -78,7 +78,7 @@
       </component>
       <component id="23fba" class="javax.swing.JButton" binding="btnPesquisar">
         <constraints>
-          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Segoe Print" size="20" style="1"/>
@@ -112,13 +112,13 @@
           <text value="Salvar"/>
         </properties>
       </component>
-      <component id="a661f" class="javax.swing.JButton" binding="btnEditar">
+      <component id="a661f" class="javax.swing.JButton" binding="btnVoltar">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Segoe Print" size="20" style="1"/>
-          <text value="Editar Pedido"/>
+          <text value="Voltar"/>
         </properties>
       </component>
       <component id="8e064" class="javax.swing.JLabel">
@@ -128,6 +128,15 @@
         <properties>
           <font name="Segoe Print" size="20" style="1"/>
           <text value="Cliente:"/>
+        </properties>
+      </component>
+      <component id="f6f62" class="javax.swing.JButton" binding="btnEditarPedido">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="Segoe Print" size="20" style="1"/>
+          <text value="Editar Pedido"/>
         </properties>
       </component>
     </children>
