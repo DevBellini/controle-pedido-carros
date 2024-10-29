@@ -11,7 +11,8 @@ public enum ErrorCodes {
     ERRO_AO_DELETAR_CLIENTE("Erro ao deletar cliente."),
     ERRO_AO_BUSCAR_CLIENTES("Erro ao buscar cliente"),
     CARRO_JA_CADASTRADO("Carro ja cadastrado"),
-    CARRO_NAO_CADASTRADO("Carro não cadastrado");
+    CARRO_NAO_CADASTRADO("Carro não cadastrado"),
+    GENERIC_ERROR("ERRO");
 
 
 

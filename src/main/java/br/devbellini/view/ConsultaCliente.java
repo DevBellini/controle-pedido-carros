@@ -71,7 +71,7 @@ public class ConsultaCliente extends JDialog {
 
     private void habilitarCampos(boolean habilitar) {
         campoEmpresa.setEditable(habilitar);
-        campoCNPJ.setEditable(false); // Não permitir edição do CNPJ
+        campoCNPJ.setEditable(true);
         campoResponsavel.setEditable(habilitar);
         campoTelefone.setEditable(habilitar);
     }
@@ -85,12 +85,27 @@ public class ConsultaCliente extends JDialog {
             String responsavel = campoResponsavel.getText().trim();
             String telefone = campoTelefone.getText().trim();
 
-            // Atualiza o cliente no serviço
-            Cliente clienteAtualizado = new Cliente(nome, cnpj, responsavel, telefone); // Presumindo que o construtor da classe Cliente aceita esses parâmetros
-            clienteService.atualizarCliente(clienteAtualizado); // Método para atualizar o cliente no serviço
+            // Tenta buscar o cliente existente antes de atualizar
+            Optional<Cliente> clienteExistente = clienteService.buscarPorCnpj(cnpj);
+            if (!clienteExistente.isPresent()) {
+                JOptionPane.showMessageDialog(this, "Cliente não encontrado para atualização.");
+                return; // Saia do método se o cliente não existir
+            }
+
+            // Atualiza os campos do cliente existente
+            Cliente cliente = clienteExistente.get();
+            cliente.setNome(nome);
+            cliente.setRepresentante(responsavel);
+            cliente.setTelefone(telefone);
+            clienteService.atualizarCliente(cliente);
 
             // Exibe uma mensagem de sucesso
             JOptionPane.showMessageDialog(this, "Cliente atualizado com sucesso!");
+
+            // Fecha a tela de consulta e abre a tela principal
+            dispose();
+            TelaPrincipal telaPrincipal = new TelaPrincipal(null);
+            telaPrincipal.setVisible(true);
 
             // Desabilita os campos após salvar
             habilitarCampos(false);

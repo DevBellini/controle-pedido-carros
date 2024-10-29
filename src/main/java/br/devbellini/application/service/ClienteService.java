@@ -32,7 +32,11 @@ public class ClienteService implements IClienteService {
         if (!clienteOptional.isPresent()) {
             throw new ExceptionResponse(ErrorCodes.CLIENTE_NAO_CADASTRADO, "Cliente não cadastrado");
         }
-        _clienteRepository.atualizarCliente(cliente);
+        try {
+            _clienteRepository.atualizarCliente(cliente);
+        } catch (Exception e) {
+            throw new ExceptionResponse(ErrorCodes.GENERIC_ERROR, "Erro ao atualizar cliente: " + e.getMessage());
+        }
     }
 
     @Override
