@@ -13,6 +13,9 @@ public class Cliente {
     private String representante;
     private String telefone;
 
+    public Cliente(String nome, String cnpj, String responsavel, String telefone) {
+    }
+
     @Override
     public String toString() {
         return nome;

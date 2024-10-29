@@ -1,5 +1,10 @@
 package br.devbellini.view;
 
+import br.devbellini.application.interfaces.IClienteService;
+import br.devbellini.application.service.ClienteService;
+import br.devbellini.domain.interfaces.IClienteRepository;
+import br.devbellini.domain.repository.ClienteRepository; // Ajuste conforme necessário
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +30,10 @@ public class TelaPrincipal extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        // Instanciar o repositório e serviço
+        IClienteRepository clienteRepository = new ClienteRepository(); // Ajuste conforme sua implementação
+        IClienteService clienteService = new ClienteService(clienteRepository); // Criação do ClienteService
 
         menuBar = new JMenuBar();
 
@@ -56,7 +65,6 @@ public class TelaPrincipal extends JDialog {
         menuBar.add(menuCarro);
 
         setJMenuBar(menuBar);
-
 
         cadastrarCliente.addActionListener(new ActionListener() {
             @Override
@@ -94,7 +102,7 @@ public class TelaPrincipal extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                 ConsultaCliente consultarCliente = new ConsultaCliente(null);
+                ConsultaCliente consultaCliente = new ConsultaCliente(null, clienteService); // Passa o clienteService
             }
         });
 
@@ -113,8 +121,6 @@ public class TelaPrincipal extends JDialog {
                 ConsultaUsuario consultaUsuario = new ConsultaUsuario(null);
             }
         });
-
-
 
         setVisible(true);
     }
