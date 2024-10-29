@@ -24,16 +24,16 @@ public class ConsultaCliente extends JDialog {
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setVisible(true);
 
         btnVoltar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Fecha a janela atual
-                TelaPrincipal telaPrincipal = new TelaPrincipal(null); // Cria a nova tela principal
-                telaPrincipal.setVisible(true); // Mostra a nova tela principal
+                dispose();
+                TelaPrincipal telaPrincipal = new TelaPrincipal(null);
+                telaPrincipal.setVisible(true);
             }
         });
+        setVisible(true);
     }
 }
 

@@ -29,6 +29,16 @@ public class ConsultaPedido extends  JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                TelaPrincipal telaPrincipal = new TelaPrincipal(null);
+                telaPrincipal.setVisible(true);
+            }
+        });
+
         setVisible(true);
     }
 }
