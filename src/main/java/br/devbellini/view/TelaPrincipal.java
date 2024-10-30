@@ -1,8 +1,12 @@
 package br.devbellini.view;
 
+import br.devbellini.application.interfaces.ICarroService;
 import br.devbellini.application.interfaces.IClienteService;
+import br.devbellini.application.service.CarroService;
 import br.devbellini.application.service.ClienteService;
+import br.devbellini.domain.interfaces.ICarroRepository;
 import br.devbellini.domain.interfaces.IClienteRepository;
+import br.devbellini.domain.repository.CarroRepository;
 import br.devbellini.domain.repository.ClienteRepository; // Ajuste conforme necessário
 
 import javax.swing.*;
@@ -15,6 +19,8 @@ public class TelaPrincipal extends JDialog {
     private JLabel bemVindo;
     private JLabel carrinho;
     private JLabel pedido;
+    private JButton btnEditar; // Declaração correta do JButton
+
     private JMenu menuUsuario, menuCarro, menuCliente, menuPedido;
     private JMenuBar menuBar;
     private JMenuItem cadastrarCliente, consultarCliente;
@@ -33,7 +39,9 @@ public class TelaPrincipal extends JDialog {
 
         // Instanciar o repositório e serviço
         IClienteRepository clienteRepository = new ClienteRepository(); // Ajuste conforme sua implementação
+        ICarroRepository carroRepository = new CarroRepository();
         IClienteService clienteService = new ClienteService(clienteRepository); // Criação do ClienteService
+        ICarroService carroService = new CarroService(carroRepository);
 
         menuBar = new JMenuBar();
 
@@ -110,7 +118,7 @@ public class TelaPrincipal extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                ConsultaCarro consultaCarro = new ConsultaCarro(null);
+                ConsultaCarro consultaCarro = new ConsultaCarro(null, carroService); // Passa o serviço de carro
             }
         });
 
