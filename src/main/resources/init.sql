@@ -31,8 +31,14 @@ CREATE TABLE IF NOT EXISTS carro (
 CREATE TABLE IF NOT EXISTS pedido (
     id_pedido INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_cliente INT NOT NULL,
-    id_carro INT NOT NULL,
     valor_total DECIMAL(10, 2),
-    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
+);
+
+CREATE TABLE IF NOT EXISTS pedido_carro (
+    id_pedido INT NOT NULL,
+    id_carro INT NOT NULL,
+    PRIMARY KEY (id_pedido, id_carro),
+    FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
     FOREIGN KEY (id_carro) REFERENCES carro(id_carro)
 );
