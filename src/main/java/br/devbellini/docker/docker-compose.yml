@@ -12,7 +12,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - ..\controle-pedido-carros\src\main\resources\init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./controle-pedido-carros/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
       - mysql_data:/var/lib/mysql
     command: --init-file=/docker-entrypoint-initdb.d/init.sql
 
