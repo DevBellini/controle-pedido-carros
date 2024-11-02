@@ -8,9 +8,9 @@ public class ConnectionFactory {
 
     private static final String USERNAME = "user";
 
-    private static final String PASSWORD = "userpassword";
+    private static final String PASSWORD = "user_password";
 
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3307/ManengerDB";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/ManengerDB";
 
     public static Connection createConnectionToMySQL() {
         try {
