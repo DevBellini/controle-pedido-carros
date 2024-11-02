@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0  # última versão estável
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: password  # senha do usuário root
+      MYSQL_DATABASE: ManengerDB          # nome do banco de dados
+      MYSQL_USER: user                    # usuário para o banco
+      MYSQL_PASSWORD: user_password       # senha do usuário
+    ports:
+      - "3306:3306"  # mapeamento da porta para acesso local
+    volumes:
+      - db_data:/var/lib/mysql  # armazenamento persistente dos dados
+      - ./src/main/resources/db-dump/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
