@@ -2,7 +2,7 @@ package br.devbellini.domain.model;
 
 import lombok.*;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
@@ -19,5 +19,45 @@ public class Cliente {
     @Override
     public String toString() {
         return nome;
+    }
+
+    public Integer getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(Integer id_cliente) {
+        this.id_cliente = id_cliente;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public String getRepresentante() {
+        return representante;
+    }
+
+    public void setRepresentante(String representante) {
+        this.representante = representante;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

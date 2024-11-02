@@ -3,42 +3,36 @@ package br.devbellini.domain.repository;
 import br.devbellini.domain.interfaces.IUsuarioRepository;
 import br.devbellini.domain.model.Usuario;
 import br.devbellini.infra.factory.ConnectionFactory;
-import com.mysql.cj.jdbc.JdbcPreparedStatement;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UsuarioRepository implements IUsuarioRepository {
 
     @Override
     public void updateUsuario(Usuario usuario) {
-
+        // Implementação do método para atualizar um usuário
     }
 
     @Override
     public void deleteUsuario(Integer id) {
-
+        // Implementação do método para deletar um usuário
     }
 
     @Override
     public Usuario buscarPorUsuario(String usuario) {
         String sql = "SELECT * FROM usuario WHERE usuario = ?";
         Connection connectionMySQL = null;
-        JdbcPreparedStatement jdbcPreparedStatement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         Usuario usuarioResult = null;
 
         try {
-
             connectionMySQL = ConnectionFactory.createConnectionToMySQL();
-
-
-            jdbcPreparedStatement = (JdbcPreparedStatement) connectionMySQL.prepareStatement(sql);
-            jdbcPreparedStatement.setString(1, usuario);
-
-
-            resultSet = jdbcPreparedStatement.executeQuery();
-
+            preparedStatement = connectionMySQL.prepareStatement(sql);
+            preparedStatement.setString(1, usuario);
+            resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 usuarioResult = new Usuario();
@@ -52,13 +46,12 @@ public class UsuarioRepository implements IUsuarioRepository {
         } catch (Exception e) {
             throw new RuntimeException("Erro ao buscar usuário", e);
         } finally {
-
             try {
                 if (resultSet != null) {
                     resultSet.close();
                 }
-                if (jdbcPreparedStatement != null) {
-                    jdbcPreparedStatement.close();
+                if (preparedStatement != null) {
+                    preparedStatement.close();
                 }
                 if (connectionMySQL != null) {
                     connectionMySQL.close();
@@ -74,29 +67,25 @@ public class UsuarioRepository implements IUsuarioRepository {
     public void save(Usuario usuario) {
         String sql = "INSERT INTO usuario(nome, email, usuario, senha, telefone) VALUES (?, ?, ?, ?, ?)";
         Connection connectionMySQL = null;
-        JdbcPreparedStatement jdbcPreparedStatement = null;
+        PreparedStatement preparedStatement = null;
 
         try {
-
             connectionMySQL = ConnectionFactory.createConnectionToMySQL();
+            preparedStatement = connectionMySQL.prepareStatement(sql);
+            preparedStatement.setString(1, usuario.getNome());
+            preparedStatement.setString(2, usuario.getEmail());
+            preparedStatement.setString(3, usuario.getUsuario());
+            preparedStatement.setString(4, usuario.getSenha());
+            preparedStatement.setString(5, usuario.getTelefone());
 
-
-            jdbcPreparedStatement = (JdbcPreparedStatement) connectionMySQL.prepareStatement(sql);
-            jdbcPreparedStatement.setString(1, usuario.getNome());
-            jdbcPreparedStatement.setString(2, usuario.getEmail());
-            jdbcPreparedStatement.setString(3, usuario.getUsuario());
-            jdbcPreparedStatement.setString(4, usuario.getSenha());
-            jdbcPreparedStatement.setString(5, usuario.getTelefone());
-
-
-            jdbcPreparedStatement.executeUpdate();
+            preparedStatement.executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException("Erro ao salvar usuário", e);
         } finally {
             // Fecha recursos
             try {
-                if (jdbcPreparedStatement != null) {
-                    jdbcPreparedStatement.close();
+                if (preparedStatement != null) {
+                    preparedStatement.close();
                 }
                 if (connectionMySQL != null) {
                     connectionMySQL.close();

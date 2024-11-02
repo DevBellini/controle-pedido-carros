@@ -10,7 +10,7 @@ services:
       MYSQL_USER: user                    # usuário para o banco
       MYSQL_PASSWORD: user_password       # senha do usuário
     ports:
-      - "3306:3306"  # mapeamento da porta para acesso local
+      - "3307:3306"  # mapeamento da porta para acesso local
     volumes:
       - db_data:/var/lib/mysql  # armazenamento persistente dos dados
       - ./src/main/resources/db-dump/init.sql:/docker-entrypoint-initdb.d/init.sql

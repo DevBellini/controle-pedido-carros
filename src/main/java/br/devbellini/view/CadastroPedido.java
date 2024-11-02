@@ -3,8 +3,8 @@ package br.devbellini.view;
 import br.devbellini.domain.interfaces.IClienteRepository;
 import br.devbellini.domain.interfaces.ICarroRepository;
 import br.devbellini.domain.interfaces.IPedidoRepository;
-import br.devbellini.domain.model.Cliente;
 import br.devbellini.domain.model.Carro;
+import br.devbellini.domain.model.Cliente;
 import br.devbellini.domain.model.Pedido;
 import br.devbellini.domain.repository.ClienteRepository;
 import br.devbellini.domain.repository.CarroRepository;
@@ -12,13 +12,15 @@ import br.devbellini.domain.repository.PedidoRepository;
 
 import javax.swing.*;
 import java.awt.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 public class CadastroPedido extends JDialog {
     private JTextField campoNumPedido;
     private JPanel cadastroPedido;
     private JComboBox<Cliente> comboBoxClientes;
-    private JTextField campoCarro;
     private JList<String> campoLista;
     private JButton btnAdd;
     private JButton btnRemove;
@@ -40,7 +42,6 @@ public class CadastroPedido extends JDialog {
 
         btnAdd.addActionListener(e -> adicionarCarro());
         btnRemove.addActionListener(e -> removerCarro());
-
         criarPedidoButton.addActionListener(e -> criarPedido());
 
         carregarClientes();
@@ -71,7 +72,6 @@ public class CadastroPedido extends JDialog {
         IClienteRepository clienteRepository = new ClienteRepository();
         try {
             List<Cliente> clientes = clienteRepository.buscarTodosClientes();
-
             for (Cliente cliente : clientes) {
                 comboBoxClientes.addItem(cliente);
             }
@@ -84,7 +84,6 @@ public class CadastroPedido extends JDialog {
         ICarroRepository carroRepository = new CarroRepository();
         try {
             List<Carro> carros = carroRepository.buscarTodosCarros();
-
             for (Carro carro : carros) {
                 comboBoxCarros.addItem(carro);
             }
@@ -94,9 +93,8 @@ public class CadastroPedido extends JDialog {
     }
 
     private void criarPedido() {
-        int numeroPedido;
         try {
-            numeroPedido = Integer.parseInt(campoNumPedido.getText());
+            int numeroPedido = Integer.parseInt(campoNumPedido.getText());
             Cliente clienteSelecionado = (Cliente) comboBoxClientes.getSelectedItem();
 
             if (clienteSelecionado == null) {
@@ -106,22 +104,62 @@ public class CadastroPedido extends JDialog {
 
             Pedido pedido = new Pedido();
             pedido.setNumeroPedido(numeroPedido);
-            pedido.setCliente(String.valueOf(clienteSelecionado));
+            pedido.setCliente(clienteSelecionado);
+            pedido.setValorTotal(calcularValorTotal()); // Certifique-se de calcular o valor total
 
-
+            // Adicionar carros ao pedido
+            List<Carro> carrosSelecionados = new ArrayList<>();
+            Enumeration<String> elementos = listModel.elements();
+            while (elementos.hasMoreElements()) {
+                String carroStr = elementos.nextElement();
+                Carro carro = buscarCarroPorString(carroStr);
+                if (carro != null) {
+                    carrosSelecionados.add(carro);
+                }
+            }
+            pedido.setCarros(carrosSelecionados); // Definindo os carros no pedido
 
             IPedidoRepository pedidoRepository = new PedidoRepository();
+            pedidoRepository.salvar(pedido); // Salva o pedido no banco de dados
+
             JOptionPane.showMessageDialog(this, "Pedido criado com sucesso!");
             dispose(); // Fecha a janela após o sucesso
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Número do pedido inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
         } catch (Exception e) {
+            e.printStackTrace(); // Adicione esta linha para imprimir o erro completo
             JOptionPane.showMessageDialog(this, "Erro ao criar pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
-//    public static void main(String[] args) {
-//        CadastroPedido cadastroPedido = new CadastroPedido(null);
-//    }
+
+    private BigDecimal calcularValorTotal() {
+        BigDecimal total = BigDecimal.ZERO;
+
+        // Obtenha a Enumeration dos elementos do DefaultListModel
+        Enumeration<String> elementos = listModel.elements();
+        while (elementos.hasMoreElements()) {
+            String carroStr = elementos.nextElement();
+            Carro carro = buscarCarroPorString(carroStr);
+            if (carro != null) {
+                total = total.add(BigDecimal.valueOf(carro.getValor()));
+            }
+        }
+
+        return total;
+    }
+
+    private Carro buscarCarroPorString(String carroStr) {
+        ICarroRepository carroRepository = new CarroRepository();
+        List<Carro> carros = carroRepository.buscarTodosCarros();
+
+        for (Carro carro : carros) {
+            if (carro.toString().equals(carroStr)) {
+                return carro;
+            }
+        }
+        return null;
+    }
 }
