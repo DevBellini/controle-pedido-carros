@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS pedido (
     id_pedido INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     id_cliente INT NOT NULL,
     valor_total DECIMAL(10, 2),
+    numero_pedido INT NOT NULL UNIQUE,
     FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente)
 );
 
