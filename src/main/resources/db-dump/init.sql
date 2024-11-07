@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS pedido (
 CREATE TABLE IF NOT EXISTS pedido_carro (
     id_pedido INT NOT NULL,
     id_carro INT NOT NULL,
+    quantidade INT DEFAULT 1,  -- Adicionando a quantidade de carros
     PRIMARY KEY (id_pedido, id_carro),
     FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido),
     FOREIGN KEY (id_carro) REFERENCES carro(id_carro)

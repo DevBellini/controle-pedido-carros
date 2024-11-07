@@ -23,17 +23,13 @@ public class PedidoRepository implements IPedidoRepository {
         }
 
         String sqlPedido = "INSERT INTO pedido(numero_pedido, id_cliente, valor_total) VALUES (?, ?, ?)";
-        String sqlPedidoCarro = "INSERT INTO pedido_carro(id_pedido, id_carro) VALUES (?, ?)";
+        String sqlPedidoCarroInserir = "INSERT INTO pedido_carro(id_pedido, id_carro, quantidade) VALUES (?, ?, ?)";
+        String sqlPedidoCarroAtualizar = "UPDATE pedido_carro SET quantidade = quantidade + ? WHERE id_pedido = ? AND id_carro = ?";
 
         try (Connection connection = ConnectionFactory.createConnectionToMySQL();
              PreparedStatement preparedStatementPedido = connection.prepareStatement(sqlPedido, PreparedStatement.RETURN_GENERATED_KEYS);
-             PreparedStatement preparedStatementPedidoCarro = connection.prepareStatement(sqlPedidoCarro)) {
-
-            // Logando os dados que serão inseridos
-            System.out.println("Inserindo Pedido: " +
-                    "\nNúmero do Pedido: " + pedido.getNumeroPedido() +
-                    "\nID do Cliente: " + pedido.getCliente().getId_cliente() +
-                    "\nValor Total: " + pedido.getValorTotal());
+             PreparedStatement preparedStatementPedidoCarroInserir = connection.prepareStatement(sqlPedidoCarroInserir);
+             PreparedStatement preparedStatementPedidoCarroAtualizar = connection.prepareStatement(sqlPedidoCarroAtualizar)) {
 
             // Inserindo o pedido
             preparedStatementPedido.setInt(1, pedido.getNumeroPedido());
@@ -51,11 +47,21 @@ public class PedidoRepository implements IPedidoRepository {
                 if (generatedKeys.next()) {
                     int idPedido = generatedKeys.getInt(1); // id_pedido
 
-                    // Inserindo os carros relacionados
+                    // Inserindo ou atualizando os carros relacionados
                     for (Carro carro : pedido.getCarros()) {
-                        preparedStatementPedidoCarro.setInt(1, idPedido);
-                        preparedStatementPedidoCarro.setInt(2, carro.getId_carro());
-                        preparedStatementPedidoCarro.executeUpdate();
+                        // Verificar se o carro já existe no pedido
+                        preparedStatementPedidoCarroAtualizar.setInt(1, 1); // A quantidade inicial
+                        preparedStatementPedidoCarroAtualizar.setInt(2, idPedido);
+                        preparedStatementPedidoCarroAtualizar.setInt(3, carro.getId_carro());
+
+                        int rowsUpdated = preparedStatementPedidoCarroAtualizar.executeUpdate();
+                        if (rowsUpdated == 0) {
+                            // Se o carro não existe no pedido, insere ele com a quantidade 1
+                            preparedStatementPedidoCarroInserir.setInt(1, idPedido);
+                            preparedStatementPedidoCarroInserir.setInt(2, carro.getId_carro());
+                            preparedStatementPedidoCarroInserir.setInt(3, 1); // A quantidade inicial
+                            preparedStatementPedidoCarroInserir.executeUpdate();
+                        }
                     }
                 } else {
                     throw new ExceptionResponse(ErrorCodes.PEDIDO_NAO_CADASTRADO, "Erro ao obter ID do pedido.");
@@ -66,6 +72,7 @@ public class PedidoRepository implements IPedidoRepository {
             throw new ExceptionResponse(ErrorCodes.PEDIDO_NAO_CADASTRADO, "Erro ao salvar pedido: " + e.getMessage());
         }
     }
+
 
 
 
