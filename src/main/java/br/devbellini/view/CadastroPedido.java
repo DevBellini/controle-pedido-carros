@@ -123,7 +123,15 @@ public class CadastroPedido extends JDialog {
             pedidoRepository.salvar(pedido); // Salva o pedido no banco de dados
 
             JOptionPane.showMessageDialog(this, "Pedido criado com sucesso!");
-            dispose(); // Fecha a janela após o sucesso
+
+            // Fecha a tela de cadastro de pedido primeiro
+            dispose(); // Fechar a tela de cadastro de pedido
+
+            // Agora, abre a tela principal
+            SwingUtilities.invokeLater(() -> {
+                TelaPrincipal telaPrincipal = new TelaPrincipal(null); // A instância de TelaPrincipal
+                telaPrincipal.setVisible(true); // Tornar visível a tela principal
+            });
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Número do pedido inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -131,7 +139,6 @@ public class CadastroPedido extends JDialog {
             e.printStackTrace(); // Adicione esta linha para imprimir o erro completo
             JOptionPane.showMessageDialog(this, "Erro ao criar pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
 
