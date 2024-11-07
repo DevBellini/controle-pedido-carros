@@ -19,6 +19,7 @@ public class ConsultaPedido extends  JDialog{
     private JLabel iconPedido;
     private JTextField numeroPedido;
     private JButton btnEditarPedido;
+    private JTextField campoValorTotal;
     private JButton btnSave;
 
     public ConsultaPedido(JFrame parent) {
