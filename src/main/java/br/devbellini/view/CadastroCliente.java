@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CadastroCliente extends JDialog {
+
     private final IClienteService _clienteService = new ClienteService(new ClienteRepository());
     private JTextField campoEmpresa;
     private JTextField campoCNPJ;
@@ -19,9 +20,13 @@ public class CadastroCliente extends JDialog {
     private JTextField campoTelefone;
     private JPanel cadastroCliente;
     private JButton salvarButton;
+    private JButton btnVoltar;
+    private TelaPrincipal telaPrincipal;  // Mantendo a referência para TelaPrincipal
 
-    public CadastroCliente(JFrame parent) {
+    // Alteração para receber a instância da TelaPrincipal
+    public CadastroCliente(TelaPrincipal parent) {
         super(parent);
+        this.telaPrincipal = parent;  // Armazenando a referência de TelaPrincipal
         setTitle("Cadastro de Cliente");
         setContentPane(cadastroCliente);
         setMinimumSize(new Dimension(600, 600));
@@ -33,7 +38,20 @@ public class CadastroCliente extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RegistrarCliente();
-                 TelaPrincipal telaPrincipal = new TelaPrincipal(null);
+            }
+        });
+
+        // Funcionalidade do botão "Voltar"
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Fecha a tela de cadastro de cliente
+                dispose();
+
+                // Mostra a TelaPrincipal sem criar uma nova instância
+                if (telaPrincipal != null) {
+                    telaPrincipal.setVisible(true);  // Tornando a tela principal visível novamente
+                }
             }
         });
 
@@ -53,12 +71,7 @@ public class CadastroCliente extends JDialog {
             return;
         }
 
-        if (!validarCNPJ(cnpj)) {
-            JOptionPane.showMessageDialog(this,
-                    "CNPJ inválido. Por favor, insira um CNPJ válido.");
-            return;
-        }
-
+        // Remover a validação do CNPJ, já que você pediu para retirar
         Cliente clienteCadastrar = new Cliente();
         clienteCadastrar.setNome(nome);
         clienteCadastrar.setCnpj(cnpj);
@@ -68,7 +81,13 @@ public class CadastroCliente extends JDialog {
         try {
             _clienteService.salvar(clienteCadastrar);
             JOptionPane.showMessageDialog(this, "Cliente cadastrado com sucesso");
-            dispose();
+            dispose(); // Fecha a janela de cadastro
+
+            // Mostra a tela principal após o cadastro
+            if (telaPrincipal != null) {
+                telaPrincipal.setVisible(true); // Volta a TelaPrincipal
+            }
+
         } catch (ExceptionResponse e) {
             JOptionPane.showMessageDialog(this, "Erro ao salvar cliente: " + e.getMessage());
         } catch (Exception e) {
@@ -77,15 +96,7 @@ public class CadastroCliente extends JDialog {
         }
     }
 
-    private boolean validarCNPJ(String cnpj) {
-        cnpj = cnpj.replaceAll("[^\\d]", "");
-        if (cnpj.length() != 14) {
-            return false;
-        }
-        return true;
-    }
-
-//    public static void main(String[] args) {
-//        CadastroCliente cadastroCliente = new CadastroCliente(null);
-//    }
+    //    public static void main(String[] args) {
+    //        CadastroCliente cadastroCliente = new CadastroCliente(null);
+    //    }
 }

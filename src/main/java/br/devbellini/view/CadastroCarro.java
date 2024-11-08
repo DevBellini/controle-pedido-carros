@@ -21,21 +21,37 @@ public class CadastroCarro extends JDialog {
     private JTextField campoValor;
     private JButton btnSalvar;
     private JPanel cadastroCarro;
+    private JButton btnVoltar;
 
     public CadastroCarro(JFrame parent) {
         super(parent);
-        setTitle("Cadastro de carro");
+        setTitle("Cadastro de Carro");
         setContentPane(cadastroCarro);
         setMinimumSize(new Dimension(600, 600));
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
+        // Ação do botão "Salvar"
         btnSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RegistrarCarro();
-                TelaPrincipal telaPrincipal = new TelaPrincipal(null);
+            }
+        });
+
+        // Funcionalidade do botão "Voltar"
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Fecha a tela de cadastro de carro
+                dispose();
+
+                // Abre a tela principal
+                SwingUtilities.invokeLater(() -> {
+                    TelaPrincipal telaPrincipal = new TelaPrincipal(null); // Criando uma nova instância de TelaPrincipal
+                    telaPrincipal.setVisible(true); // Tornando a tela principal visível
+                });
             }
         });
 
@@ -83,6 +99,9 @@ public class CadastroCarro extends JDialog {
             _carroService.salvar(carroRegistrar);
             JOptionPane.showMessageDialog(this, "Carro cadastrado com sucesso.");
             dispose(); // Fecha a janela após o registro com sucesso
+            // Abre a tela principal após o cadastro
+            TelaPrincipal telaPrincipal = new TelaPrincipal(null);
+            telaPrincipal.setVisible(true); // Exibe a tela principal
         } catch (ExceptionResponse e) {
             JOptionPane.showMessageDialog(this, "Erro: " + e.getMessage());
         } catch (Exception e) {
@@ -91,7 +110,7 @@ public class CadastroCarro extends JDialog {
         }
     }
 
-//    public static void main(String[] args) {
-//        CadastroCarro cadastroCarro = new CadastroCarro(null);
-//    }
+    //    public static void main(String[] args) {
+    //        CadastroCarro cadastroCarro = new CadastroCarro(null);
+    //    }
 }

@@ -12,6 +12,8 @@ import br.devbellini.domain.repository.PedidoRepository;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -26,10 +28,14 @@ public class CadastroPedido extends JDialog {
     private JButton btnRemove;
     private JComboBox<Carro> comboBoxCarros;
     private JButton criarPedidoButton;
+    private JButton btnVoltar;
     private DefaultListModel<String> listModel;
+    private TelaPrincipal telaPrincipal;
 
-    public CadastroPedido(JFrame parent) {
-        super(parent);
+    // Alteração no construtor para aceitar TelaPrincipal
+    public CadastroPedido(TelaPrincipal parent) {
+        super(parent);  // Chama o construtor da classe JDialog com a tela principal como parent
+        this.telaPrincipal = parent;  // Armazenando a referência da TelaPrincipal
         setTitle("Cadastro de Pedido");
         setContentPane(cadastroPedido);
         setMinimumSize(new Dimension(900, 600));
@@ -46,6 +52,24 @@ public class CadastroPedido extends JDialog {
 
         carregarClientes();
         carregarCarros();
+
+        btnVoltar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Fecha a tela de cadastro de pedido
+                dispose();
+
+                // Verifica se o parentFrame é uma instância de TelaPrincipal
+                if (telaPrincipal != null) {
+                    // Caso seja uma instância de TelaPrincipal, apenas torna ela visível
+                    telaPrincipal.setVisible(true);
+                } else {
+                    // Caso contrário, cria uma nova instância de TelaPrincipal
+                    TelaPrincipal novaTelaPrincipal = new TelaPrincipal(null);
+                    novaTelaPrincipal.setVisible(true);
+                }
+            }
+        });
 
         setVisible(true);
     }
@@ -128,10 +152,14 @@ public class CadastroPedido extends JDialog {
             dispose(); // Fechar a tela de cadastro de pedido
 
             // Agora, abre a tela principal
-            SwingUtilities.invokeLater(() -> {
-                TelaPrincipal telaPrincipal = new TelaPrincipal(null); // A instância de TelaPrincipal
-                telaPrincipal.setVisible(true); // Tornar visível a tela principal
-            });
+            if (telaPrincipal != null) {
+                // Caso a tela principal já esteja aberta, apenas torna ela visível
+                telaPrincipal.setVisible(true);
+            } else {
+                // Caso contrário, cria uma nova instância de TelaPrincipal
+                TelaPrincipal novaTelaPrincipal = new TelaPrincipal(null);
+                novaTelaPrincipal.setVisible(true);
+            }
 
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Número do pedido inválido.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -140,7 +168,6 @@ public class CadastroPedido extends JDialog {
             JOptionPane.showMessageDialog(this, "Erro ao criar pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
-
 
     private BigDecimal calcularValorTotal() {
         BigDecimal total = BigDecimal.ZERO;
